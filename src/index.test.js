@@ -52,6 +52,19 @@ describe("Testing endpoints", () => {
         expect(response.body.name).toBe(validProduct.name)
     })
 
+    it("should test that the /products endpoint is returning one product with the correct id", async () => {
+        const response = await request.post("/products").send(validProduct)
+
+        expect(response.status).toBe(201)
+        expect(response.body.name).toBe(validProduct.name)
+
+        const _id = response.body._id
+
+        const getResponse = await request.get(`/products/${_id}`)
+        expect(getResponse.body.name).toBe(validProduct.name)
+
+    })
+
     afterAll(done => {
         mongoose.connection.dropDatabase().then(() => {
             mongoose.connection.close()
