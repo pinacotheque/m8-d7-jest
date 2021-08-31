@@ -11,7 +11,7 @@ const request = supertest(app)
 describe("Testing tests", () => {
 
     it("should test that true is true", () => {
-        expect(true).toBe(true)
+        expect(true).toBe(false)
     })
 
 })
