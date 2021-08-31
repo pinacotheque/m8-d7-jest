@@ -8,6 +8,15 @@ productsRouter.get('/', async (req, res) => {
     res.status(200).send(products)
 })
 
+productsRouter.get('/:id', async (req, res) => {
+    try {
+        const product = await ProductModel.findById(req.params.id)
+        res.status(200).send(product)
+    } catch (error) {
+        res.status(404).send()
+    }
+})
+
 productsRouter.post('/', async (req, res) => {
     try {
         const product = new ProductModel(req.body)
@@ -19,7 +28,8 @@ productsRouter.post('/', async (req, res) => {
         res.status(400).send()
     }
 
-
 })
+
+
 
 export default productsRouter
